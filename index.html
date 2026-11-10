@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#40121f">
+<title>Bhai Dooj | The Kumawat Crew</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap');
+:root{--wine:#40121f;--wine2:#65263a;--gold:#d9ad62;--gold2:#f2d49a;--cream:#fff8ed;--ink:#2c1720;--muted:#765d5d;--line:#ead9c3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}button{font:inherit}
+.hero{min-height:610px;position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;text-align:center;padding:90px 22px;color:var(--cream);background:radial-gradient(ellipse at 50% 15%,#be6f4640,transparent 45%),linear-gradient(135deg,#2a0b16,#4b1426 55%,#2b0c18)}
+.hero:before,.hero:after{content:"";position:absolute;inset:20px;border:1px solid #d9ad6240;pointer-events:none}.hero:after{inset:30px;border-color:#d9ad621c}
+.hero-inner{max-width:850px;position:relative;z-index:1}.eyebrow,.kicker{letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;font-weight:700;color:var(--gold2)}
+h1,h2,h3{font-family:'Playfair Display',serif}h1{font-size:clamp(3rem,8vw,6.6rem);line-height:1;margin:20px 0}h1 span{color:var(--gold2);font-style:italic}
+.hero p{max-width:650px;margin:0 auto;color:#f6e5d4;line-height:1.8}.quote{margin-top:24px!important;color:var(--gold2)!important;font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic}
+.diyas{font-size:2rem;letter-spacing:18px;margin-top:32px}.cta{display:inline-block;margin-top:28px;padding:13px 23px;border-radius:99px;background:var(--gold2);color:#39101c;text-decoration:none;font-weight:700}
+.spark{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffe5a7;box-shadow:0 0 14px 3px #f3c978;animation:twinkle 3s infinite ease-in-out}@keyframes twinkle{50%{opacity:.25;transform:scale(.5)}}
+.section{padding:78px 22px;max-width:1240px;margin:auto}.section-head{text-align:center;max-width:720px;margin:0 auto 34px}.section-head h2{font-size:clamp(2.1rem,5vw,3.4rem);color:var(--wine);margin:12px 0}.section-head p{color:var(--muted);line-height:1.75;margin:0}
+.brothers{background:linear-gradient(#fff8ed,#f8eddf)}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1160px;margin:auto;padding:0 22px 78px}
+.brother-card{background:#fffdf8;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 35px #40121f12;display:flex;flex-direction:column;min-width:0}
+.card-top{padding:18px 19px 0}.number{font-size:.66rem;letter-spacing:.16em;color:#b1844e;font-weight:700;text-transform:uppercase}.card-top h3{font-size:1.5rem;color:var(--wine);margin:6px 0}.traits{font-size:.82rem;color:#876c63;line-height:1.5}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:16px 16px 0}.photo-frame{position:relative;aspect-ratio:4/4.5;overflow:hidden;border-radius:13px;background:linear-gradient(145deg,#6b2b3b,#32101d);isolation:isolate}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:block}.photo-frame img.broken{display:none}
+.photo-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#f6dca9;font:2rem 'Playfair Display',serif}.photo-frame:has(img:not(.broken)) .photo-fallback{display:none}
+.photo-shade{position:absolute;inset:50% 0 0;background:linear-gradient(transparent,#18050c70);pointer-events:none}
+.photo-name{position:absolute;bottom:8px;left:9px;right:6px;color:white;font-size:.62rem;font-weight:700;text-shadow:0 1px 5px #000;overflow-wrap:anywhere;z-index:2}
+.tilak{position:absolute;left:var(--tx,50%);top:var(--ty,24%);width:12px;height:21px;border-radius:50% 50% 55% 55%;background:radial-gradient(ellipse at 35% 25%,#f16a78,#a6092b 70%);box-shadow:0 0 0 2px #ffd9c333,0 0 9px #e65a70;transform:translate(-50%,-50%) scale(0);opacity:0;z-index:4;pointer-events:none}
+.rice{position:absolute;left:var(--tx,50%);top:var(--ty,24%);width:4px;height:4px;border-radius:50%;background:#fff1cf;opacity:0;z-index:4;pointer-events:none}
+.photo-frame.blessed .tilak{animation:tilakIn .65s cubic-bezier(.2,.9,.3,1.3) forwards}.photo-frame.blessed .rice{animation:riceIn .7s ease-out forwards}
+@keyframes tilakIn{65%{transform:translate(-50%,-50%) scale(1.3);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+@keyframes riceIn{35%{opacity:1}100%{opacity:1;transform:translate(var(--dx),var(--dy))}}
+.rice.r1{--dx:-12px;--dy:-8px}.rice.r2{--dx:12px;--dy:-5px}.rice.r3{--dx:0px;--dy:12px}
+.adjusting .photo-frame{cursor:crosshair;outline:2px dashed #d9ad62;outline-offset:2px}.adjusting .tilak{transform:translate(-50%,-50%) scale(1)!important;opacity:.9!important;animation:none!important}
+.card-actions{padding:16px 18px 19px;margin-top:auto}.bless-btn{width:100%;border:0;border-radius:12px;background:var(--wine);color:#fff4e4;padding:12px;font-weight:700;cursor:pointer}.bless-btn:hover{background:#70243a}.bless-btn.done{background:#8b6336}
+.tools{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:0 auto 28px;padding:0 18px}.tool-btn{border:1px solid #caa66e;background:#fffaf2;color:#542032;padding:10px 15px;border-radius:99px;font-weight:700;cursor:pointer}.tool-btn.active{background:#542032;color:#fff4e4}.tool-help{font-size:.8rem;color:#765d5d;text-align:center;max-width:650px;margin:-12px auto 22px;line-height:1.6}
+.memory{background:var(--wine);color:#fff7e9}.memory .section-head h2{color:#f5d9a7}.memory .section-head p{color:#ead6c6}.memory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px;max-width:950px;margin:auto}.memory-note{border:1px solid #d9ad6240;background:#ffffff08;border-radius:18px;padding:22px}.memory-note .emoji{font-size:1.7rem}.memory-note h3{color:#f5d9a7;font-size:1.25rem;margin:8px 0}.memory-note p{color:#f0dfd1;line-height:1.7;font-size:.91rem;margin:0}
+.group-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}.group-gallery img{width:100%;height:190px;object-fit:cover;border-radius:14px;border:1px solid #d9ad6260;background:#5b1b2d}.closing{text-align:center;padding:65px 22px;background:#f8ead9}.closing .cartoon{font-size:2.5rem;letter-spacing:9px}.closing h2{color:var(--wine);margin:12px}.closing p{color:var(--muted);max-width:620px;margin:auto;line-height:1.7}
+footer{background:#2b0c17;color:#d8b98b;text-align:center;padding:22px;font-size:.75rem;letter-spacing:.06em}
+.modal-backdrop{position:fixed;inset:0;background:#16050cbb;display:none;place-items:center;padding:20px;z-index:20;backdrop-filter:blur(6px)}.modal-backdrop.show{display:grid}.modal{max-width:440px;width:100%;background:#fff8ed;border:1px solid #e4c58e;border-radius:24px;padding:32px 26px;text-align:center;box-shadow:0 25px 80px #10030a88}.seal{font-size:2.5rem}.small-title{color:#a66b37;text-transform:uppercase;letter-spacing:.2em;font-size:.66rem;font-weight:700;margin-top:8px}.modal h3{font-size:1.9rem;color:var(--wine);margin:8px 0 12px}.modal p{color:#634c4b;line-height:1.75;margin:0}.close{margin-top:22px;border:0;border-radius:99px;background:var(--wine);color:white;padding:11px 27px;font-weight:700;cursor:pointer}
+.confetti{position:fixed;top:-12px;z-index:30;pointer-events:none;animation:fall 2.5s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:0}}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.hero{min-height:570px;padding:75px 24px}.section{padding:60px 17px}.cards{grid-template-columns:1fr;padding:0 15px 60px;max-width:430px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-frame{aspect-ratio:4/4.2}.memory-grid{grid-template-columns:1fr}.group-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.group-gallery img{height:145px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Background music player */
+.music-player{position:fixed;right:18px;bottom:18px;z-index:40;display:flex;align-items:center;gap:11px;padding:10px 14px 10px 10px;border:1px solid #d9ad62;border-radius:999px;background:#fff8ed;color:#40121f;box-shadow:0 8px 28px #2b0c1730}
+.music-toggle{width:42px;height:42px;border:0;border-radius:50%;background:#40121f;color:#fff8ed;font-size:1rem;cursor:pointer;display:grid;place-items:center}
+.music-toggle:hover{background:#70243a}
+.music-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.music-title{font-size:.78rem;font-weight:700;white-space:nowrap}
+.music-status{font-size:.68rem;color:#765d5d}
+@media(max-width:580px){.music-player{right:12px;bottom:12px;padding:8px 12px 8px 8px}.music-toggle{width:39px;height:39px}}
+
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">A little love · A lot of drama · One big family</div>
+    <h1>Happy <span>Bhai Dooj</span></h1>
+    <p>To the five boys who make family gatherings louder, plans crazier, and life a whole lot more entertaining.</p>
+    <p class="quote">“Built-in bodyguards, unpaid comedians, and professional troublemakers. Lucky me.”</p>
+    <div class="diyas" aria-hidden="true">🪔 ✨ 🪔</div>
+    <a class="cta" href="#tika">Let's do the tika thing ✦</a>
+  </div>
+</header>
+
+
+<div class="music-player" role="group" aria-label="Website music player">
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Play music" title="Play music">▶</button>
+  <div class="music-meta">
+    <span class="music-title">A little background music</span>
+    <span class="music-status" id="musicStatus">Tap to play</span>
+  </div>
+  <audio id="bgMusic" src="mio-mao-lalalalala-tiktok-vers (1).mp3" preload="metadata" loop></audio>
+</div>
+
+<main>
+<section class="brothers" id="tika">
+  <div class="section" style="padding-bottom:22px">
+    <div class="section-head">
+      <div class="kicker">The main characters</div>
+      <h2>Five brothers. All the camera rolls.</h2>
+      <p>Har bhai ka apna album, apni vibe. Tika button dabao for a little blessing and a personalised note.</p>
+    </div>
+  </div>
+  <div class="tools">
+    <button class="tool-btn" id="adjustToggle" type="button" aria-pressed="false">◎ Adjust tika position</button>
+    <button class="tool-btn" id="resetPositions" type="button">Reset positions</button>
+  </div>
+  <p class="tool-help" id="toolHelp">Tika ko forehead ke exact centre par set karne ke liye “Adjust tika position” dabao, phir har photo mein forehead par click karo. Position har photo ke liye alag save hogi.</p>
+  <div class="cards" id="brotherCards"></div>
+</section>
+
+<section class="memory" id="memories">
+  <div class="section">
+    <div class="section-head">
+      <div class="kicker" style="color:#e9c17b">Our kind of forever</div>
+      <h2>One family. Unlimited memories.</h2>
+      <p>Blood relation ho ya cousin wala connection, family wali feeling sabke liye same hai. And that's the best part.</p>
+    </div>
+    <div class="memory-grid">
+      <div class="memory-note"><div class="emoji">🏡</div><h3>Joint-family energy</h3><p>Childhood ki masti, family functions ka shor, random teasing, food ke around gathering, and woh stories jo har baar repeat hoti hain — our family has its own universe.</p></div>
+      <div class="memory-note"><div class="emoji">🫶</div><h3>Our whole squad</h3><p>With our elder sister in the picture too, this family is never short of opinions, advice, jokes or support. Cousins ho ya real siblings, you all are my people.</p></div>
+      <div class="memory-note"><div class="emoji">🍲</div><h3>Food, fun & friendly chaos</h3><p>From kitchen experiments to last-minute plans, every get-together becomes a story. Special mention to the family chefs — your services are appreciated.</p></div>
+      <div class="memory-note"><div class="emoji">✨</div><h3>Always in my corner</h3><p>Different nature, different interests, different levels of mischief — but one thing stays constant: having you all around makes life better. Stay exactly this wonderfully annoying.</p></div>
+    </div>
+    <div class="section-head" style="margin:42px auto 0"><div class="kicker" style="color:#e9c17b">The family camera roll</div><p>Group pictures live here — add or remove filenames in the list in the script whenever you like.</p></div>
+    <div class="group-gallery" id="groupGallery"></div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="cartoon" aria-hidden="true">🧿 🪔 🧡</div>
+  <div class="kicker">To my favourite gang of headaches</div>
+  <h2>Stay blessed, stay awesome.</h2>
+  <p>May your lives be full of happiness, good health, success, great food and just the right amount of mischief. Happy Bhai Dooj, Kumawat crew!</p>
+</section>
+</main>
+<footer>MADE WITH LOVE & A LITTLE FAMILY-LEVEL DRAMA · HAPPY BHAI DOOJ ✦</footer>
+
+<div class="modal-backdrop" id="messageModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><div class="seal">🪔✨</div><div class="small-title">Tika applied · Blessings activated</div><h3 id="modalTitle">A note for you</h3><p id="modalMessage"></p><button class="close" id="closeModal" type="button">Aww, okay ✦</button></div>
+</div>
+
+<script>
+/* PHOTO SETUP:
+   Keep this HTML file in the SAME folder as these JPG files.
+   Add, remove, or reorder filenames inside each photos: [...] list.
+   The filename spelling must match your files exactly.
+*/
+const brothers = [
+  {name:"Daksh Kumawat",key:"Daksh",role:"The protective one",traits:"Protective • Busy • Thoda sa gusse wala",photos:["daksh1.jpg","daksh2.jpg","daksh3.jpg","daksh4.jpg","daksh5.jpg","daksh6.jpg"]},
+  {name:"Dheeraj Kumawat",key:"Dheeraj",role:"The calm genius",traits:"Kind • Informative • Kitchen pro",photos:["dheeraj1.jpg","dheeraj2.jpg","dheeraj3.jpg","dheeraj4.jpg"]},
+  {name:"Siddharth Kumawat",key:"Siddharth",role:"The creative chaos",traits:"Mischievous • Funny • Candle maker",photos:["siddharth1.jpg","siddharth2.jpg","siddharth3.jpg"]},
+  {name:"Amit Kumawat",key:"Amit",role:"The chaos machine",traits:"Energetic • Kind • Full-time troublemaker",photos:["amit1.jpg"]},
+  {name:"Sushil Kumawat",key:"Sushil",role:"The senior boss",traits:"The eldest • Business mode • Anime watcher",photos:["sushil1.jpg","sushil2.jpg"]}
+];
+const groupPhotos=["allbrothercombined1.jpg","allbrothercombined2.jpg","allbrothercombined3.jpg","allbrothercombined4.jpg","allbrothercombined5.jpg","dakshandsiddharth.jpg"];
+const messages = {
+Daksh:"Daksh bhaiya, app kitna bhi busy rahe par apni behen ko thoda time de diya karo 😁 Aur kitna bhi gussa kare, your caring side never goes unnoticed. Protective mode thoda kam, smile mode thoda zyada. Hamesha khush reh, healthy reh aur apne goals achieve karo. Happy Bhai Dooj! ❤️",
+Dheeraj:"Dheeraj bhai, thank you for always sharing useful gyaan, being so calm and helping whenever needed. Studies ho ya life advice, your informative mode is always ON! Aur chef sahab, next family meal bhi aapke naam. Stay happy and keep shining! ✨",
+Siddharth:"Siddharth bhaiya, family ka entertainment department aapke bina incomplete hai. Cooking se candles tak, talent toh full package hai! Bas apni masti aur creativity kabhi kam mat karna. Khush raho, successful raho — and keep making us laugh! 🕯️",
+Amit:"Amit, aapki energy ka charger kaunsa hai? Mischief level always 100%, but dil se genuinely kind. Keep that fun-loving spirit, bas kabhi-kabhi thoda shaant mode bhi try kar lena. Lots of good wishes, troublemaker! 😄",
+Sushil:"Sushil bhaiya, eldest hone ki responsibility ka level alag hi hai! Business, family and anime — multitasking pro. Aapki kindness and support are appreciated, even if the scary senior-boss aura arrives first. Wishing you loads of success and happiness! 🌟"
+};
+const STORAGE_KEY="kumawat-bhaidooj-tika-positions-v1";
+let positions={};try{positions=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){positions={}}
+let adjusting=false,lastButton=null;
+const cards=document.getElementById("brotherCards");
+
+function photoMarkup(filename){
+  const pos=positions[filename]||{x:50,y:24};
+  return `<div class="photo-frame" data-file="${filename}" style="--tx:${pos.x}%;--ty:${pos.y}%">
+    <div class="photo-fallback">✦</div>
+    <img src="${filename}" alt="${filename.replace(".jpg","")}" loading="lazy" onerror="this.classList.add('broken')">
+    <div class="photo-shade"></div><span class="photo-name">${filename}</span>
+    <span class="tilak"></span><i class="rice r1"></i><i class="rice r2"></i><i class="rice r3"></i>
+  </div>`;
+}
+brothers.forEach((b,index)=>{
+  const card=document.createElement("article");card.className="brother-card";card.dataset.name=b.key;
+  card.innerHTML=`<div class="card-top"><div class="number">0${index+1} / Brother</div><h3>${b.name}</h3><div class="traits">${b.role} · ${b.traits}</div></div>
+  <div class="gallery">${b.photos.map(photoMarkup).join("")}</div>
+  <div class="card-actions"><button class="bless-btn" type="button">✦ Bless / Apply Tika</button></div>`;
+  cards.appendChild(card);
+});
+document.getElementById("groupGallery").innerHTML=groupPhotos.map(file=>`<img src="${file}" alt="${file.replace(".jpg","")}" loading="lazy" onerror="this.style.display='none'">`).join("");
+
+const modal=document.getElementById("messageModal"),modalTitle=document.getElementById("modalTitle"),modalMessage=document.getElementById("modalMessage");
+function savePositions(){localStorage.setItem(STORAGE_KEY,JSON.stringify(positions))}
+function applyPositions(){
+  document.querySelectorAll(".photo-frame").forEach(frame=>{
+    const p=positions[frame.dataset.file]||{x:50,y:24};
+    frame.style.setProperty("--tx",p.x+"%");frame.style.setProperty("--ty",p.y+"%");
+  });
+}
+document.getElementById("adjustToggle").addEventListener("click",()=>{
+  adjusting=!adjusting;document.body.classList.toggle("adjusting",adjusting);
+  const btn=document.getElementById("adjustToggle");btn.classList.toggle("active",adjusting);btn.setAttribute("aria-pressed",String(adjusting));
+  btn.textContent=adjusting?"✓ Finish adjusting":"◎ Adjust tika position";
+  document.getElementById("toolHelp").textContent=adjusting?"Ab har photo ke forehead ke centre par click karo. Har image ki setting alag save hogi. Finish adjusting dabakar normal mode mein laut jao.":"Tika ko forehead ke exact centre par set karne ke liye “Adjust tika position” dabao, phir har photo mein forehead par click karo. Position har photo ke liye alag save hogi.";
+});
+document.getElementById("resetPositions").addEventListener("click",()=>{
+  positions={};localStorage.removeItem(STORAGE_KEY);applyPositions();
+});
+document.querySelectorAll(".photo-frame").forEach(frame=>{
+  frame.addEventListener("click",event=>{
+    if(!adjusting)return;
+    const rect=frame.getBoundingClientRect();
+    const x=Math.max(2,Math.min(98,((event.clientX-rect.left)/rect.width)*100));
+    const y=Math.max(2,Math.min(98,((event.clientY-rect.top)/rect.height)*100));
+    positions[frame.dataset.file]={x:Number(x.toFixed(1)),y:Number(y.toFixed(1))};
+    savePositions();applyPositions();
+  });
+});
+document.querySelectorAll(".bless-btn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    if(adjusting){document.getElementById("toolHelp").textContent="Pehle “Finish adjusting” dabao, phir Tika apply karo.";return;}
+    const card=button.closest(".brother-card"),name=card.dataset.name;
+    card.querySelectorAll(".photo-frame").forEach(frame=>{frame.classList.remove("blessed");void frame.offsetWidth;frame.classList.add("blessed")});
+    button.classList.add("done");button.textContent="✓ Tika applied!";
+    lastButton=button;modalTitle.textContent=`For ${name} bhai`;modalMessage.textContent=messages[name];modal.classList.add("show");
+    document.getElementById("closeModal").focus();makeConfetti();
+  });
+});
+function makeConfetti(){
+  const symbols=["✦","•","✧"];
+  for(let i=0;i<24;i++){const p=document.createElement("span");p.className="confetti";p.textContent=symbols[Math.floor(Math.random()*symbols.length)];p.style.left=Math.random()*100+"vw";p.style.color=["#d9ad62","#b31335","#e58b45","#fff0c9"][Math.floor(Math.random()*4)];p.style.fontSize=(8+Math.random()*13)+"px";p.style.animationDelay=Math.random()*.5+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),3200)}
+}
+function hideModal(){modal.classList.remove("show");if(lastButton)lastButton.focus()}
+document.getElementById("closeModal").addEventListener("click",hideModal);
+modal.addEventListener("click",e=>{if(e.target===modal)hideModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("show"))hideModal()});
+const hero=document.querySelector(".hero");for(let i=0;i<32;i++){const s=document.createElement("span");s.className="spark";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*3+"s";hero.appendChild(s)}
+
+// Background music: browsers require a visitor interaction before audio can play.
+const bgMusic=document.getElementById("bgMusic");
+const musicToggle=document.getElementById("musicToggle");
+const musicStatus=document.getElementById("musicStatus");
+musicToggle.addEventListener("click",async()=>{
+  if(bgMusic.paused){
+    try{
+      await bgMusic.play();
+      musicToggle.textContent="Ⅱ";
+      musicToggle.setAttribute("aria-label","Pause music");
+      musicToggle.title="Pause music";
+      musicStatus.textContent="Now playing";
+    }catch(error){
+      musicStatus.textContent="Tap again to play";
+    }
+  }else{
+    bgMusic.pause();
+    musicToggle.textContent="▶";
+    musicToggle.setAttribute("aria-label","Play music");
+    musicToggle.title="Play music";
+    musicStatus.textContent="Paused";
+  }
+});
+bgMusic.addEventListener("ended",()=>{
+  musicToggle.textContent="▶";
+  musicToggle.setAttribute("aria-label","Play music");
+  musicStatus.textContent="Tap to play";
+});
+
+</script>
+</body>
+</html>
