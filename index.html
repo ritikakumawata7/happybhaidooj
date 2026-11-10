@@ -42,6 +42,16 @@ footer{background:#2b0c17;color:#d8b98b;text-align:center;padding:22px;font-size
 @media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:580px){.hero{min-height:570px;padding:75px 24px}.section{padding:60px 17px}.cards{grid-template-columns:1fr;padding:0 15px 60px;max-width:430px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-frame{aspect-ratio:4/4.2}.memory-grid{grid-template-columns:1fr}.group-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.group-gallery img{height:145px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Background music player */
+.music-player{position:fixed;right:18px;bottom:18px;z-index:40;display:flex;align-items:center;gap:11px;padding:10px 14px 10px 10px;border:1px solid #d9ad62;border-radius:999px;background:#fff8ed;color:#40121f;box-shadow:0 8px 28px #2b0c1730}
+.music-toggle{width:42px;height:42px;border:0;border-radius:50%;background:#40121f;color:#fff8ed;font-size:1rem;cursor:pointer;display:grid;place-items:center}
+.music-toggle:hover{background:#70243a}
+.music-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.music-title{font-size:.78rem;font-weight:700;white-space:nowrap}
+.music-status{font-size:.68rem;color:#765d5d}
+@media(max-width:580px){.music-player{right:12px;bottom:12px;padding:8px 12px 8px 8px}.music-toggle{width:39px;height:39px}}
+
 </style>
 </head>
 <body>
@@ -55,6 +65,16 @@ footer{background:#2b0c17;color:#d8b98b;text-align:center;padding:22px;font-size
     <a class="cta" href="#tika">Let's do the tika thing ✦</a>
   </div>
 </header>
+
+
+<div class="music-player" role="group" aria-label="Website music player">
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Play music" title="Play music">▶</button>
+  <div class="music-meta">
+    <span class="music-title">A little background music</span>
+    <span class="music-status" id="musicStatus">Tap to play</span>
+  </div>
+  <audio id="bgMusic" src="mio-mao-lalalalala-tiktok-vers (1).mp3" preload="metadata" loop></audio>
+</div>
 
 <main>
 <section class="brothers" id="tika">
@@ -194,6 +214,36 @@ document.getElementById("closeModal").addEventListener("click",hideModal);
 modal.addEventListener("click",e=>{if(e.target===modal)hideModal()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("show"))hideModal()});
 const hero=document.querySelector(".hero");for(let i=0;i<32;i++){const s=document.createElement("span");s.className="spark";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*3+"s";hero.appendChild(s)}
+
+// Background music: browsers require a visitor interaction before audio can play.
+const bgMusic=document.getElementById("bgMusic");
+const musicToggle=document.getElementById("musicToggle");
+const musicStatus=document.getElementById("musicStatus");
+musicToggle.addEventListener("click",async()=>{
+  if(bgMusic.paused){
+    try{
+      await bgMusic.play();
+      musicToggle.textContent="Ⅱ";
+      musicToggle.setAttribute("aria-label","Pause music");
+      musicToggle.title="Pause music";
+      musicStatus.textContent="Now playing";
+    }catch(error){
+      musicStatus.textContent="Tap again to play";
+    }
+  }else{
+    bgMusic.pause();
+    musicToggle.textContent="▶";
+    musicToggle.setAttribute("aria-label","Play music");
+    musicToggle.title="Play music";
+    musicStatus.textContent="Paused";
+  }
+});
+bgMusic.addEventListener("ended",()=>{
+  musicToggle.textContent="▶";
+  musicToggle.setAttribute("aria-label","Play music");
+  musicStatus.textContent="Tap to play";
+});
+
 </script>
 </body>
 </html>
